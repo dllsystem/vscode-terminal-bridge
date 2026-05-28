@@ -116,6 +116,42 @@ npm run compile
 npm run package   # produces *.vsix
 ```
 
+## Releasing a new version
+
+Releases are automated via GitHub Actions on tag push. The workflow lives at
+`.github/workflows/release.yml` and runs `npm ci → compile → package →
+ovsx publish → gh release create`. Local publishing is not needed.
+
+**Prerequisites (one-time setup):**
+
+- An `OVSX_PAT` secret must exist under repo Settings → Secrets and
+  variables → Actions. Generate the token at
+  https://open-vsx.org/user-settings/tokens.
+
+**To cut a new release:**
+
+```bash
+# 1. Make your changes in src/, media/, etc.
+# 2. Update CHANGELOG.md with a new "## [X.Y.Z] - YYYY-MM-DD" section.
+# 3. Bump the version and create a tag in one shot:
+npm version patch       # or `minor` / `major` — bumps package.json + creates tag
+# 4. Push both the commit and the tag:
+git push --follow-tags
+# 5. Watch the workflow at:
+#    https://github.com/dllsystem/vscode-terminal-bridge/actions
+```
+
+The workflow validates that the tag matches `package.json` `version` before
+publishing — so `npm version` and the tag stay in sync automatically.
+
+If you need to publish from your local machine for any reason (workflow
+broken, etc.), the manual flow still works:
+
+```bash
+npm run compile && npm run package
+npx ovsx --pat "$OVSX_PAT" publish terminal-bridge-X.Y.Z.vsix
+```
+
 ## License
 
 MIT — see [LICENSE](./LICENSE).
