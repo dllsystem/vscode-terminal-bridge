@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2026-05-27
+
+### Changed
+
+- README now documents the automated release workflow (tag → GitHub Actions
+  publishes to Open VSX and creates a GitHub Release).
+- CHANGELOG entry for `0.1.0` was amended with a note explaining the
+  unverified-namespace state at first publish.
+
+### Internal
+
+- Added `.github/workflows/release.yml` — tag-push triggered pipeline that
+  validates the tag against `package.json`, builds, publishes to Open VSX
+  (with `--skip-duplicate`), and creates a GitHub Release with the VSIX
+  attached. This is now the canonical release path.
+
 ## [0.1.0] - 2026-05-27
 
 Initial public release on Open VSX Registry as `dllsystem.terminal-bridge`.
