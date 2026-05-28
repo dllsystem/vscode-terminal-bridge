@@ -1,0 +1,127 @@
+{
+  "name": "terminal-bridge",
+  "displayName": "Terminal Bridge",
+  "description": "Bridge editor and integrated terminal: paste images from clipboard via Ctrl+V and send selection refs (path:line) to the terminal.",
+  "version": "0.1.0",
+  "publisher": "dllsystem",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dllsystem/vscode-terminal-bridge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dllsystem/vscode-terminal-bridge/issues"
+  },
+  "homepage": "https://github.com/dllsystem/vscode-terminal-bridge#readme",
+  "keywords": [
+    "terminal",
+    "clipboard",
+    "paste",
+    "image",
+    "code-server",
+    "selection"
+  ],
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onCommand:terminalImagePaste.smartPaste",
+    "onCommand:terminalImagePaste.imagePaste",
+    "onCommand:terminalImagePaste.sendSelectionRefToTerminal",
+    "onCommand:terminalImagePaste.copySelectionRefToClipboard"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "terminalImagePaste.smartPaste",
+        "title": "Smart Paste (text or image)",
+        "category": "Terminal Bridge"
+      },
+      {
+        "command": "terminalImagePaste.imagePaste",
+        "title": "Force image paste",
+        "category": "Terminal Bridge"
+      },
+      {
+        "command": "terminalImagePaste.sendSelectionRefToTerminal",
+        "title": "Send Selection to Terminal",
+        "category": "Terminal Bridge",
+        "icon": "$(send)"
+      },
+      {
+        "command": "terminalImagePaste.copySelectionRefToClipboard",
+        "title": "Copy Selection to Terminal",
+        "category": "Terminal Bridge",
+        "icon": "$(clippy)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "terminalImagePaste.smartPaste",
+        "key": "ctrl+v",
+        "mac": "cmd+v",
+        "when": "terminalFocus && !terminalTextSelected"
+      },
+      {
+        "command": "terminalImagePaste.imagePaste",
+        "key": "ctrl+shift+v",
+        "mac": "cmd+shift+v",
+        "when": "terminalFocus"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "terminalImagePaste.sendSelectionRefToTerminal",
+          "when": "editorIsOpen",
+          "group": "navigation@99"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "terminalImagePaste.sendSelectionRefToTerminal",
+          "group": "1_modification@10"
+        },
+        {
+          "command": "terminalImagePaste.copySelectionRefToClipboard",
+          "group": "1_modification@11"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Terminal Bridge",
+      "properties": {
+        "terminalImagePaste.saveDirectory": {
+          "type": "string",
+          "default": "/tmp/clipboard",
+          "description": "Directory where pasted images are saved. Default /tmp/clipboard (ephemeral)."
+        },
+        "terminalImagePaste.maxAgeHours": {
+          "type": "number",
+          "default": 24,
+          "description": "Maximum age in hours for saved files before automatic cleanup."
+        },
+        "terminalImagePaste.maxFileSizeMB": {
+          "type": "number",
+          "default": 10,
+          "description": "Maximum image size accepted (in MB). Larger images are rejected with a warning."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package --no-dependencies",
+    "publish": "ovsx publish"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0",
+    "@vscode/vsce": "^3.0.0",
+    "ovsx": "^0.10.0"
+  }
+}
