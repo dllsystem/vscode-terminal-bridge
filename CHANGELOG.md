@@ -12,6 +12,12 @@ Initial public release on Open VSX Registry as `dllsystem.terminal-bridge`.
 Extracted from `loque-facil-livewire/tools/vscode-extensions/terminal-image-paste`
 (originally developed in 2025 as v0.1.0 – v0.2.2 inside that monorepo).
 
+> **Note**: at first publish the `dllsystem` namespace was created in
+> unverified state (`unrelatedPublisher: true` in the API response).
+> Installation works, but Open VSX will display an "Unrelated Publisher"
+> warning on the extension page until the namespace is formally claimed
+> via https://open-vsx.org/user-settings/namespaces.
+
 ### Added
 
 - **Terminal image paste (Ctrl+V)** — overrides the integrated terminal's
