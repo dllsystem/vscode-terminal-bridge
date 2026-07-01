@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.3] - 2026-07-01
+
+### Changed
+
+- **Version realigned to the `0.2.x` lineage.** The extension was published
+  as `0.1.0`/`0.1.1` at extraction, but the same source had already shipped
+  inside the `loque-facil-livewire` monorepo up to `0.2.2`. Continuing at
+  `0.2.3` avoids regressing the number developers already had installed and
+  keeps Open VSX resolving this as the newest version.
+
+### Internal
+
+- This repository is now the **single source of truth** for the extension.
+  The monorepo copy (`loque-facil-livewire/tools/vscode-extensions/terminal-image-paste/`)
+  is being removed, and both Coder templates (`loquefacil`, `certify`) install
+  `dllsystem.terminal-bridge` from Open VSX with `--force`. No behavioral
+  changes to the extension in this release.
+
 ## [0.1.1] - 2026-05-27
 
 ### Changed

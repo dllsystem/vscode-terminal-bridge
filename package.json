@@ -2,7 +2,7 @@
   "name": "terminal-bridge",
   "displayName": "Terminal Bridge",
   "description": "Bridge editor and integrated terminal: paste images from clipboard via Ctrl+V and send selection refs (path:line) to the terminal.",
-  "version": "0.1.1",
+  "version": "0.2.3",
   "publisher": "dllsystem",
   "license": "MIT",
   "repository": {
